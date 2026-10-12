@@ -165,6 +165,15 @@ monitor principal y especifica la procedencia de sus datos.
   en órbita terrestre baja (LEO).
 - ESTADO DE DATOS: Real (posición en vivo de la ISS — Open Notify).
 
+[24] EL OJO DEL HURACÁN (CICLONES TROPICALES)
+- SEÑAL: Remolino vectorial de dos brazos girando sobre un ojo central.
+- INTERPRETACIÓN: Ciclón tropical, huracán o tifón activo. El tamaño y
+  la velocidad de giro del remolino son proporcionales a la velocidad
+  real del viento; los más intensos (>200 km/h) muestran etiqueta.
+- ESTADO DE DATOS: Real (ciclones activos a nivel mundial, con nombre,
+  país y velocidad real del viento — GDACS, ONU/Comisión Europea).
+  Respaldo con huracanes históricos reales si no hay red.
+
 ------------------------------------------------------------------
 * Para alterar la visualización de capas individuales, invoque el
   GESTOR DE CAPAS [Tecla ESPACIO] dentro del Modo Global.
