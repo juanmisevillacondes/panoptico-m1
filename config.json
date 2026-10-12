@@ -1,0 +1,28 @@
+{
+  "events": {
+    "sismografo": {
+      "module": "events.sismografo",
+      "class_name": "SismografoEvent",
+      "active": true,
+      "enabled_in_panoptic": true
+    },
+    "emergencia": {
+      "module": "events.emergencia",
+      "class_name": "EmergenciaEvent",
+      "active": true,
+      "enabled_in_panoptic": true
+    },
+    "tormentas": {
+      "module": "events.tormentas",
+      "class_name": "TormentasEvent",
+      "active": true,
+      "enabled_in_panoptic": true
+    },
+    "vigia": {
+      "module": "events.vigia",
+      "class_name": "VigiaEvent",
+      "active": true,
+      "enabled_in_panoptic": true
+    }
+  }
+}

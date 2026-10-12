@@ -1,0 +1,23 @@
+Panóptico M1
+
+Vivimos rodeados de información vital. Datos, sismos, alertas de todo el globo... pero todo está disperso, oculto en servidores lejanos o atrapado en aburridos y caóticos paneles de control. Los monitores de siempre son rígidos, fríos y poco intuitivos. Nosotros queríamos romper esa barrera. Queríamos darle al pulso del planeta un hogar elegante en tu propio escritorio.
+
+Hoy presentamos Panóptico M1.
+
+¿Qué es Panóptico M1? Son tres cosas:
+Un monitor global de eventos en tiempo real.
+Un centro de mando con red de rescate autónoma.
+Un hermoso lienzo vivo del planeta Tierra.
+
+Un monitor global. Un centro de mando. Un lienzo vivo.
+¿Lo entendéis? No son tres sistemas distintos. Es un solo dispositivo. Y lo llamamos Panóptico M1.
+
+La experiencia es mágica.
+
+Es increíblemente simple. Lo enciendes, y un elegante mapamundi translúcido cobra vida bajo un reloj cristalino. Arriba, en la esquina, un discreto indicador tricolor te revela al instante el estado del sistema: Verde, estás conectado al mundo. Azul, el sistema ha desplegado su propia red táctica de rescate (Modo AP). Rojo, estás en aislamiento.
+
+Y si quieres saber qué ocurre en el mundo, basta con una simple pulsación del encoder. Panóptico M1 carga dinámicamente sus módulos, conecta con los servidores, y despliega información vital —como la actividad sísmica— directamente en tu pantalla a través de un elegante teletipo. Se actualiza solo desde la nube, gestiona sus propias conexiones de red y te devuelve el control absoluto con una fluidez pasmosa.
+
+Sin configuraciones a ciegas. Sin colapsos de red. Es una ventana directa a los datos del planeta que convierte el código de red más puro en una interfaz elegante y modular. Una mezcla perfecta entre control absoluto, inteligencia de software y diseño minimalista.
+
+Simplemente, es mágico.

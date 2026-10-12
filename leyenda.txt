@@ -1,0 +1,167 @@
+PANÓPTICO M1 - MANUAL DE CAMPO Y LEYENDA TÁCTICA
+------------------------------------------------------------------
+Este documento cataloga las firmas visuales proyectadas en el 
+monitor principal y especifica la procedencia de sus datos.
+
+[01] EL LEVIATÁN DE DATOS (MIGRACIÓN MARINA)
+- SEÑAL: Círculos concéntricos expansivos aislados en océanos.
+- INTERPRETACIÓN: Ping GPS de megafauna (tiburones, ballenas)
+  al romper la superficie del agua.
+- ESTADO DE DATOS: Real (avistamientos reales y recientes de tiburones,
+  ballenas y orcas — red GBIF de biodiversidad). No es un tag GPS en
+  vivo (no existe un feed público de eso), pero sí son registros
+  reales de observación, no inventados. Respaldo ficticio si no hay red.
+
+[02] EL TERMÓMETRO DE LA BIOSFERA (INCENDIOS FORESTALES)
+- SEÑAL: Agrupaciones de puntos oscuros / textura de ceniza.
+- INTERPRETACIÓN: Anomalías térmicas detectadas vía satélite
+  representando frentes de fuego activos.
+- ESTADO DE DATOS: Real (NASA GIBS / MODIS Thermal Anomalies, vía WMS).
+  Respaldo procedimental si la imagen satelital no está disponible.
+
+[03] EL RELOJ HELIOS (CLIMA ESPACIAL)
+- SEÑAL: Ondas magnéticas (fluidos) en latitudes polares.
+- INTERPRETACIÓN: Impacto de llamaradas solares en la magnetosfera;
+  probabilidad de auroras boreales e interferencia de radio.
+- ESTADO DE DATOS: Real (Índice Kp planetario — NOAA SWPC).
+
+[04] EL ALIENTO GEOLÓGICO (CENIZA VOLCÁNICA)
+- SEÑAL: Punto sólido central con matriz de puntos en expansión.
+- INTERPRETACIÓN: Erupción volcánica activa y el radio de dispersión
+  de la nube de ceniza empujada por vientos de altitud.
+- ESTADO DE DATOS: Real (erupciones activas y nivel de alerta —
+  GDACS, ONU/Comisión Europea). Respaldo con volcanes históricos
+  notables si no hay red.
+
+[05] EL PULSO DEL CAOS DIGITAL (CIBERATAQUES)
+- SEÑAL: Líneas vectoriales rectas cruzando continentes velozmente.
+- INTERPRETACIÓN: Tráfico de malware global y ataques DDoS.
+- ESTADO DE DATOS: Real (Top IPs hostiles — SANS ISC DShield).
+  Respaldo con geopolítica plausible si no hay red.
+
+[06] EL COSECHADOR DE TORMENTAS (ACTIVIDAD ELÉCTRICA)
+- SEÑAL: Micro-destellos intensos de muy corta duración (1-5 frames).
+- INTERPRETACIÓN: Impactos de relámpagos en la atmósfera terrestre.
+- ESTADO DE DATOS: Real (Códigos meteorológicos WMO — Open-Meteo),
+  sobre 15 nodos de alta convección. Respaldo simulado si no hay
+  tormentas activas en ningún nodo.
+
+[07] EL IMPACTO CELESTE (BÓLIDOS ATMOSFÉRICOS)
+- SEÑAL: Línea recta y cortante atravesando un segmento del mapa.
+- INTERPRETACIÓN: Detección de meteoritos detonando en la atmósfera.
+  Frecuencia de aparición baja y solemne.
+- ESTADO DE DATOS: Real (API Fireball — JPL/NASA). Respaldo con
+  histórico real de bólidos famosos (Cheliábinsk, etc.) si no hay red.
+
+[08] EL RESPIRO DEL OCÉANO (OLEAJE EXTREMO)
+- SEÑAL: Nodos marinos que ondulan con círculos concéntricos densos.
+- INTERPRETACIÓN: Boyas oceánicas detectando "Olas Vagabundas"
+  superiores a los 10 metros de altura durante tormentas masivas.
+- ESTADO DE DATOS: Real (Red de boyas NDBC — NOAA). Respaldo con
+  tormentas históricas reales si el mar está en calma globalmente.
+
+[09] EL PULSO DEL CONOCIMIENTO (EDICIONES WIKIPEDIA)
+- SEÑAL: Lluvia sutil de píxeles efímeros sobre masas de tierra.
+- INTERPRETACIÓN: Flujo en tiempo real de humanos editando
+  la enciclopedia; densidad visual ligada a eventos mundiales.
+- ESTADO DE DATOS: Real (EventStream de Wikimedia). La ubicación
+  geográfica exacta de cada edición no es pública: se aproxima a una
+  zona plausible según el idioma de la wiki editada.
+
+[10] EL SILENCIO POLAR (DESPRENDIMIENTO DE ICEBERGS)
+- SEÑAL: Polígonos blancos separándose lentamente de los continentes.
+- INTERPRETACIÓN: Bloques de hielo masivos (tamaño ciudad) 
+  a la deriva desde la Antártida y Groenlandia.
+- ESTADO DE DATOS: Simulado (Dinámica extremadamente lenta).
+
+[11] LA SOMBRA DEL TERMINADOR (RELOJ PLANETARIO)
+- SEÑAL: División del mapa; área limpia (día) y área punteada (noche).
+- INTERPRETACIÓN: Avance de la oscuridad dictado por la rotación
+  de la Tierra respecto al sol.
+- ESTADO DE DATOS: Real (cálculo astronómico exacto de declinación
+  solar y punto subsolar a partir de la hora UTC; no requiere API).
+
+[12] EL TEJIDO SUBMARINO (CABLES ÓPTICOS)
+- SEÑAL: Curvas de Bézier tensas conectando la costa de los países.
+- INTERPRETACIÓN: Infraestructura física de Internet. Destellos 
+  indican caídas o cortes en la fibra óptica submarina.
+- ESTADO DE DATOS: Simulado.
+
+[14] EL LATIDO DEMOGRÁFICO (NACIMIENTOS Y DEFUNCIONES)
+- SEÑAL: Símbolos aritméticos (+) y (-) parpadeando brevemente.
+- INTERPRETACIÓN: El flujo incesante de la vida humana.
+- ESTADO DE DATOS: Híbrido — no existe (ni puede existir) un feed público
+  de cada nacimiento/defunción individual en el mundo, así que cada
+  símbolo sigue siendo estadístico. Pero el RITMO al que aparecen ahora
+  se calcula con la tasa de natalidad/mortalidad REAL y actual del
+  Banco Mundial (API pública), no con una cifra fija inventada.
+
+[15] EL ESPECTRO LUMÍNICO (APAGONES MASIVOS)
+- SEÑAL: Nodos de luces urbanas fijas que sufren vacíos oscuros.
+- INTERPRETACIÓN: Cortes de energía y fallos en cascada dentro de 
+  la infraestructura eléctrica global.
+- ESTADO DE DATOS: Simulado.
+
+[16] LA MEMORIA DEL BOSQUE (DEFORESTACIÓN)
+- SEÑAL: Bloques geométricos sobre selvas que pierden píxeles.
+- INTERPRETACIÓN: Cuenta atrás ecológica; degradación en tiempo real
+  de la masa forestal del planeta.
+- ESTADO DE DATOS: Real (alertas GLAD-L de Global Forest Watch sobre
+  Amazonía, Congo y Borneo) SI se configura una API key gratuita en
+  settings.ini [API] gfw_key. Sin clave, cae a estimación estadística.
+
+[17] EL CANTO ACÚSTICO (HIDRÓFONOS)
+- SEÑAL: Ondas extremadamente finas y gigantescas desde alta mar.
+- INTERPRETACIÓN: Micrófonos submarinos captando cantos de ballenas 
+  o movimientos de fallas tectónicas profundas.
+- ESTADO DE DATOS: Simulado.
+
+[18] LA GRAVEDAD VERTICAL (LANZAMIENTOS ESPACIALES)
+- SEÑAL: Pilar grueso y tenso que cruza la pantalla hacia arriba.
+- INTERPRETACIÓN: Vehículo orbital escapando de la atmósfera terrestre
+  superando la velocidad del sonido.
+- ESTADO DE DATOS: Real (próximos lanzamientos mundiales y cuenta
+  atrás reales — Launch Library 2, The Space Devs). Respaldo con
+  bases históricas si no hay red. La telemetría Mach es artística.
+
+[19] EL VIGÍA DEL COSMOS (RADIOTELESCOPIOS)
+- SEÑAL: Líneas de seguimiento proyectadas desde la superficie al cielo.
+- INTERPRETACIÓN: Vector real de azimut/elevación desde 5 radiotelescopios
+  reales (VLA, ALMA, FAST, Parkes, Effelsberg) hacia un satélite real
+  que esté sobre su horizonte en este instante (incluido el telescopio
+  espacial Hubble). La longitud del vector se acorta cuanto más cerca
+  del cenit está el objetivo.
+- ESTADO DE DATOS: Real (elementos orbitales — CelesTrak; posición
+  calculada con propagación SGP4). Si ningún satélite es visible desde
+  ningún observatorio en este instante (algo normal y esperable),
+  cae a un objetivo cósmico ficticio en modo autónomo. Requiere el
+  paquete "sgp4" instalado (ver requirements.txt).
+
+[20] LA SANGRE DEL COMERCIO (AIS MARÍTIMO)
+- SEÑAL: Rutas oceánicas repletas de micropíxeles fluyendo.
+- INTERPRETACIÓN: Tránsito logístico. Agrupaciones densas indican 
+  cuellos de botella y bloqueos en canales (Suez, Panamá).
+- ESTADO DE DATOS: Simulado (Algoritmo de colisión naval).
+
+[21] EL SISMÓGRAFO PLANETARIO
+- SEÑAL: Círculos concéntricos expansivos desde fallas terrestres.
+- INTERPRETACIÓN: Movimientos telúricos; el diámetro del anillo
+  estipula la magnitud de la energía liberada.
+- ESTADO DE DATOS: Real (sismos M>2.5 de las últimas 24h — USGS).
+
+[22] EL VECTOR DE EMERGENCIA (SQUAWK 7700)
+- SEÑAL: Bloque invertido parpadeante con estela y vector frontal.
+- INTERPRETACIÓN: Vuelo comercial que ha declarado emergencia
+  crítica o fallo masivo de radio, perdiendo altitud.
+- ESTADO DE DATOS: Real (transpondedores ATC en vivo — OpenSky
+  Network).
+
+[23] EL VIGÍA ORBITAL (ESTACIÓN ESPACIAL INTERNACIONAL)
+- SEÑAL: Bloque geométrico desplazándose sobre una onda senoidal.
+- INTERPRETACIÓN: Telemetría y posición matemática de la ISS
+  en órbita terrestre baja (LEO).
+- ESTADO DE DATOS: Real (posición en vivo de la ISS — Open Notify).
+
+------------------------------------------------------------------
+* Para alterar la visualización de capas individuales, invoque el
+  GESTOR DE CAPAS [Tecla ESPACIO] dentro del Modo Global.

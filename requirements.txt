@@ -1,0 +1,3 @@
+pygame>=2.5
+requests>=2.31
+sgp4>=2.23

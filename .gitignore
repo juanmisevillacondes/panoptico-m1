@@ -1,0 +1,16 @@
+# Estado local del dispositivo: preferencias del usuario (tema, capas visibles,
+# opacidades). NUNCA debe seguirse por git, o una actualización OTA (git reset
+# --hard) borraría los ajustes personales de cada Panoptico M1 desplegado.
+settings.ini
+
+# Bytecode y cachés de Python
+__pycache__/
+*.pyc
+
+# Archivos de escritorio / residuos de edición, no parte del proyecto
+Nuevo documento de texto.txt
+py
+
+# Duplicados de imagen marcados para borrar por el propio autor
+mapamundiBORRAR.jpg
+mapamundi_2BORRAR.jpg
