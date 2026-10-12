@@ -6,6 +6,13 @@ import time
 import configparser
 
 class EmergenciaEvent(BaseEvent):
+    # Los 3 códigos reales de emergencia de transpondedor de la aviación civil
+    CODIGOS_EMERGENCIA = {
+        "7700": "EMERGENCIA GENERAL",
+        "7600": "FALLO DE RADIO",
+        "7500": "SECUESTRO",
+    }
+
     def __init__(self):
         super().__init__(name="VECTOR DE EMERGENCIA")
         self.vuelos = []
@@ -84,8 +91,9 @@ class EmergenciaEvent(BaseEvent):
                         for state in datos["states"]:
                             squawk = state[14]  # El índice 14 contiene el código del transpondedor
 
-                            # Filtramos por código 7700 (Emergencia General)
-                            if squawk == "7700":
+                            # Los 3 códigos reales de emergencia de la aviación civil (no solo 7700)
+                            tipo = self.CODIGOS_EMERGENCIA.get(squawk)
+                            if tipo:
                                 callsign = state[1].strip() if state[1] else "DESC."
                                 lon = state[5]
                                 lat = state[6]
@@ -99,6 +107,8 @@ class EmergenciaEvent(BaseEvent):
                                         "x": x, "y": y,
                                         "callsign": callsign,
                                         "altitud": altitud,
+                                        "squawk": squawk,
+                                        "tipo": tipo,
                                         "animacion": 0  # Variable para el radar pulsante
                                     })
 
@@ -106,11 +116,11 @@ class EmergenciaEvent(BaseEvent):
 
                     # Actualizamos el teletipo
                     if len(self.vuelos) > 0:
-                        nombres = ", ".join([v["callsign"] for v in self.vuelos])
-                        self.mensaje = f"ALERTA ATC: {len(self.vuelos)} AERONAVE(S) EN EMERGENCIA (7700) - {nombres}"
+                        detalle = ", ".join([f"{v['callsign']} ({v['tipo']})" for v in self.vuelos])
+                        self.mensaje = f"ALERTA ATC: {len(self.vuelos)} AERONAVE(S) EN EMERGENCIA - {detalle}"
                     else:
                         prefijo = "RADAR ATC (AUTENTICADO)" if token else "RADAR ATC"
-                        self.mensaje = f"{prefijo}: NO SE DETECTAN AERONAVES EN EMERGENCIA (SQUAWK 7700) ACTUALMENTE."
+                        self.mensaje = f"{prefijo}: NO SE DETECTAN AERONAVES EN EMERGENCIA (7500/7600/7700) ACTUALMENTE."
 
                 elif respuesta.status_code == 429:
                     espera = int(respuesta.headers.get("X-Rate-Limit-Retry-After-Seconds", 60))
@@ -126,9 +136,9 @@ class EmergenciaEvent(BaseEvent):
             except Exception:
                 self.mensaje = "INTERFERENCIA EN LA RECEPCIÓN ATC. REINTENTANDO..."
 
-            # ATENCIÓN: OpenSky banea temporalmente si haces peticiones muy seguidas.
-            # 60 segundos es el tiempo de espera perfecto y respetuoso.
-            time.sleep(60)
+            # 180s: esta capa comparte la cuota diaria de OpenSky con la capa de
+            # vigilancia estratégica (ambas consultan el mismo endpoint /states/all).
+            time.sleep(180)
 
     def update(self, tiempo_actual):
         # Animamos un anillo expansivo alrededor del avión para llamar la atención
@@ -148,8 +158,10 @@ class EmergenciaEvent(BaseEvent):
             # Anillo de alerta pulsante
             pygame.draw.circle(surface, color_linea, (int(x), int(y)), int(vuelo["animacion"]), 1)
 
-            # Etiqueta con el número de vuelo y la altitud
-            texto_radar = self.fuente_radar.render(f"{vuelo['callsign']} {int(vuelo['altitud'])}m", True, color_fondo)
+            # Etiqueta con el número de vuelo, código y altitud
+            texto_radar = self.fuente_radar.render(
+                f"{vuelo['callsign']} [{vuelo['squawk']}] {int(vuelo['altitud'])}m", True, color_fondo
+            )
             fondo_rect = texto_radar.get_rect(topleft=(int(x) + 8, int(y) - 8)).inflate(6, 4)
             pygame.draw.rect(surface, color_linea, fondo_rect)
             surface.blit(texto_radar, (int(x) + 11, int(y) - 6))

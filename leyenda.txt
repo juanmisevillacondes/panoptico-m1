@@ -149,10 +149,13 @@ monitor principal y especifica la procedencia de sus datos.
   estipula la magnitud de la energía liberada.
 - ESTADO DE DATOS: Real (sismos M>2.5 de las últimas 24h — USGS).
 
-[22] EL VECTOR DE EMERGENCIA (SQUAWK 7700)
-- SEÑAL: Bloque invertido parpadeante con estela y vector frontal.
-- INTERPRETACIÓN: Vuelo comercial que ha declarado emergencia
-  crítica o fallo masivo de radio, perdiendo altitud.
+[22] EL VECTOR DE EMERGENCIA (SQUAWK 7500/7600/7700)
+- SEÑAL: Cruz parpadeante con anillo de alerta pulsante.
+- INTERPRETACIÓN: Vuelo que ha activado uno de los 3 códigos reales de
+  emergencia del transpondedor: 7700 (emergencia general), 7600 (fallo
+  de radio/comunicaciones) o 7500 (secuestro). El 7700 es rarísimo en
+  la práctica (pocos al día en todo el mundo); el 7600 es bastante más
+  frecuente.
 - ESTADO DE DATOS: Real (transpondedores ATC en vivo — OpenSky
   Network). El acceso anónimo tiene un límite de peticiones muy bajo
   y se satura con facilidad (HTTP 429). Para mayor fiabilidad, crea una
@@ -173,6 +176,16 @@ monitor principal y especifica la procedencia de sus datos.
 - ESTADO DE DATOS: Real (ciclones activos a nivel mundial, con nombre,
   país y velocidad real del viento — GDACS, ONU/Comisión Europea).
   Respaldo con huracanes históricos reales si no hay red.
+
+[25] LA VIGILANCIA ESTRATÉGICA (VUELOS MILITARES Y GUBERNAMENTALES)
+- SEÑAL: Marcador en forma de rombo con etiqueta de identificación.
+- INTERPRETACIÓN: Aeronave con un indicativo (callsign) reconocido como
+  militar, gubernamental o de evacuación médica (p.ej. RCH = transporte
+  USAF, NOAA = caza-huracanes, SAMU = evacuación médica francesa).
+  Son convenciones de nomenclatura ADS-B de dominio público, no
+  información sensible ni oculta.
+- ESTADO DE DATOS: Real (transpondedores ATC en vivo — OpenSky
+  Network). Comparte cuota de API con el Vector de Emergencia.
 
 ------------------------------------------------------------------
 * Para alterar la visualización de capas individuales, invoque el
