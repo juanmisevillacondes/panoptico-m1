@@ -154,7 +154,10 @@ monitor principal y especifica la procedencia de sus datos.
 - INTERPRETACIÓN: Vuelo comercial que ha declarado emergencia
   crítica o fallo masivo de radio, perdiendo altitud.
 - ESTADO DE DATOS: Real (transpondedores ATC en vivo — OpenSky
-  Network).
+  Network). El acceso anónimo tiene un límite de peticiones muy bajo
+  y se satura con facilidad (HTTP 429). Para mayor fiabilidad, crea una
+  cuenta gratuita en opensky-network.org y configura
+  settings.ini [API] opensky_client_id / opensky_client_secret.
 
 [23] EL VIGÍA ORBITAL (ESTACIÓN ESPACIAL INTERNACIONAL)
 - SEÑAL: Bloque geométrico desplazándose sobre una onda senoidal.
