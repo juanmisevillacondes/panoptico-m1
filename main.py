@@ -112,7 +112,7 @@ modulos_eventos = cargar_modulos_dinamicos("events")
 
 # --- 5. GESTIÓN DE CONFIGURACIÓN Y PERSISTENCIA ---
 config = configparser.ConfigParser()
-config.read('settings.ini')
+config.read('settings.ini', encoding='utf-8')
 
 if 'SISTEMA' not in config: config['SISTEMA'] = {}
 if 'tema' not in config['SISTEMA']: config['SISTEMA']['tema'] = 'OSCURO'
@@ -132,10 +132,14 @@ def guardar_configuracion():
     config['SISTEMA']['tema'] = tema_actual
     config['SISTEMA']['reloj_alpha'] = str(reloj_alpha)
     config['SISTEMA']['mapa_alpha'] = str(mapa_alpha)
-    if 'CAPAS' not in config: config['CAPAS'] = {}
+    # Reconstruimos [CAPAS] desde cero en cada guardado: si no hacemos esto,
+    # cualquier capa renombrada o eliminada deja para siempre una clave
+    # huérfana en el archivo (así se generaron los duplicados con acentos
+    # rotos que se iban acumulando sin borrarse nunca).
+    config['CAPAS'] = {}
     for k, v in visibilidad_capas.items():
         config['CAPAS'][k] = str(v)
-    with open('settings.ini', 'w') as f: config.write(f)
+    with open('settings.ini', 'w', encoding='utf-8') as f: config.write(f)
     
 guardar_configuracion()
 
@@ -229,14 +233,49 @@ def ejecutar_actualizacion_ota():
 
 def apagar_sistema():
     global ejecutando
+
     pantalla.fill(COLOR_MAP["OSCURO"]["FONDO"])
     texto = fuente_titulo.render("APAGANDO SISTEMA...", True, COLOR_MAP["OSCURO"]["LINEA"])
-    pantalla.blit(texto, texto.get_rect(center=(ANCHO//2, ALTO//2)))
+    aviso = fuente_instruccion.render("NO DESCONECTES LA CORRIENTE TODAVÍA", True, (220, 50, 50))
+    pantalla.blit(texto, texto.get_rect(center=(ANCHO // 2, ALTO // 2 - 20)))
+    pantalla.blit(aviso, aviso.get_rect(center=(ANCHO // 2, ALTO // 2 + 40)))
     pygame.display.flip()
-    time.sleep(2)
-    os.system("sudo shutdown now")
-    ejecutando = False
-    sys.exit()
+
+    # os.system() bloqueaba sin límite si sudo pedía una contraseña que nunca
+    # llegaba (sin terminal interactiva), dejando "APAGANDO SISTEMA..." congelado
+    # para siempre sin que hubiera forma de saber si era seguro desenchufar.
+    # Con timeout, como mucho esperamos 10s y SIEMPRE mostramos un resultado claro.
+    try:
+        resultado = subprocess.run(
+            ["sudo", "shutdown", "-h", "now"],
+            timeout=10, capture_output=True, text=True
+        )
+        orden_enviada = (resultado.returncode == 0)
+    except Exception:
+        orden_enviada = False
+
+    pantalla.fill(COLOR_MAP["OSCURO"]["FONDO"])
+    if orden_enviada:
+        t1 = fuente_instruccion.render("ORDEN DE APAGADO ENVIADA CORRECTAMENTE.", True, COLOR_MAP["OSCURO"]["LINEA"])
+        t2 = fuente_instruccion.render("ESPERA A QUE EL LED VERDE (ACT) DEJE DE PARPADEAR", True, (220, 50, 50))
+        t3 = fuente_instruccion.render("ANTES DE DESCONECTAR LA CORRIENTE.", True, (220, 50, 50))
+    else:
+        t1 = fuente_instruccion.render("ERROR: NO SE PUDO INICIAR EL APAGADO.", True, (220, 50, 50))
+        t2 = fuente_instruccion.render("EL SISTEMA SIGUE ENCENDIDO CON NORMALIDAD.", True, COLOR_MAP["OSCURO"]["AGUA"])
+        t3 = fuente_instruccion.render("NO LO DESCONECTES: REINTÉNTALO O APÁGALO DESDE UNA TERMINAL.", True, COLOR_MAP["OSCURO"]["AGUA"])
+    pantalla.blit(t1, t1.get_rect(center=(ANCHO // 2, ALTO // 2 - 30)))
+    pantalla.blit(t2, t2.get_rect(center=(ANCHO // 2, ALTO // 2 + 10)))
+    pantalla.blit(t3, t3.get_rect(center=(ANCHO // 2, ALTO // 2 + 40)))
+    pygame.display.flip()
+    time.sleep(4)
+
+    if orden_enviada:
+        ejecutando = False
+        pygame.quit()
+        sys.exit()
+    else:
+        # No se pudo apagar: volvemos al menú en vez de cerrar la app a ciegas
+        return
 
 def dibujar_lienzo_base(superficie, tema):
     colores = COLOR_MAP[tema]
