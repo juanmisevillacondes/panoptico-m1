@@ -187,6 +187,18 @@ monitor principal y especifica la procedencia de sus datos.
 - ESTADO DE DATOS: Real (transpondedores ATC en vivo — OpenSky
   Network). Comparte cuota de API con el Vector de Emergencia.
 
+[26] LA RED ORBITAL (SATÉLITES EN TIEMPO REAL)
+- SEÑAL: Formas geométricas distintas (cuadrado, círculo, triángulo,
+  rombo) con una breve estela indicando la dirección real de avance.
+- INTERPRETACIÓN: Posición real, en vivo, de una muestra de satélites
+  de distintas categorías: estaciones espaciales (ISS, Tiangong),
+  meteorológicos, navegación GPS y científicos (incluido el Hubble).
+  La altitud mostrada es real (p.ej. GPS ~19.900 km, Meteosat-9 en
+  órbita geoestacionaria ~35.780 km).
+- ESTADO DE DATOS: Real (elementos orbitales — CelesTrak; posición
+  calculada con propagación SGP4, igual que la capa 21). Requiere el
+  paquete "sgp4" instalado (ver requirements.txt).
+
 ------------------------------------------------------------------
 * Para alterar la visualización de capas individuales, invoque el
   GESTOR DE CAPAS [Tecla ESPACIO] dentro del Modo Global.
