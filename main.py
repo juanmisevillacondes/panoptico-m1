@@ -2,6 +2,7 @@
 import pygame
 import sys
 import os
+import random
 import importlib
 import pkgutil
 import threading
@@ -162,6 +163,10 @@ indice_menu, indice_selector, indice_ajustes = 0, 0, 0
 evento_actual_individual = None
 tiempo_inicio_boot = pygame.time.get_ticks()
 
+# Modo aleatorio: va mostrando capas individuales al azar, cambiando sola cada X ms
+DURACION_MODO_ALEATORIO = 20000
+tiempo_cambio_aleatorio = 0
+
 scroll_offset_menu, scroll_offset_selector, scroll_offset_leyenda = 0, 0, 0
 MENU_VISIBLE_ITEMS = 10  
 SELECTOR_VISIBLE_ITEMS = 10 
@@ -175,6 +180,7 @@ for i, mod in enumerate(modulos_eventos):
     clean_name = mod.name.split('. ', 1)[1] if '. ' in mod.name else mod.name
     menu_opciones.append(f"{i+1:02d}. {clean_name}")
 
+menu_opciones.append("94. MODO ALEATORIO (CAPAS INDIVIDUALES)")
 menu_opciones.append("95. AJUSTES Y RED WI-FI MANUAL")
 menu_opciones.append("96. MANUAL DE CAMPO (LEYENDA)")
 menu_opciones.append("97. REVISAR ACTUALIZACIONES OTA")
@@ -298,6 +304,12 @@ while ejecutando:
     elif estado_sistema == "BOOT_2" and tiempo_actual - tiempo_inicio_boot > 4000:
         estado_sistema = "GLOBAL"
 
+    # Modo aleatorio: cada DURACION_MODO_ALEATORIO ms saltamos a otra capa distinta
+    if estado_sistema == "ALEATORIO" and tiempo_actual - tiempo_cambio_aleatorio > DURACION_MODO_ALEATORIO:
+        tiempo_cambio_aleatorio = tiempo_actual
+        otras_capas = [m for m in modulos_eventos if m is not evento_actual_individual]
+        evento_actual_individual = random.choice(otras_capas) if otras_capas else evento_actual_individual
+
     for evento in pygame.event.get():
         if evento.type == pygame.QUIT: ejecutando = False
             
@@ -336,7 +348,11 @@ while ejecutando:
                 if estado_sistema == "MENU":
                     seleccion = menu_opciones[indice_menu]
                     if seleccion.startswith("00."): estado_sistema = "GLOBAL"
-                    elif seleccion.startswith("95."): 
+                    elif seleccion.startswith("94."):
+                        estado_sistema = "ALEATORIO"
+                        evento_actual_individual = random.choice(modulos_eventos)
+                        tiempo_cambio_aleatorio = tiempo_actual
+                    elif seleccion.startswith("95."):
                         estado_sistema = "AJUSTES"
                         indice_ajustes, editando_ajuste = 0, False
                         mensaje_ajustes = ""
@@ -382,13 +398,13 @@ while ejecutando:
                 elif estado_sistema == "AJUSTES" and editando_ajuste:
                     editando_ajuste = False
                     guardar_configuracion()
-                elif estado_sistema in ["GLOBAL", "INDIVIDUAL", "REPOSO", "LEYENDA", "AJUSTES"]: 
+                elif estado_sistema in ["GLOBAL", "INDIVIDUAL", "ALEATORIO", "REPOSO", "LEYENDA", "AJUSTES"]:
                     estado_sistema = "MENU"
 
     if estado_sistema in ["GLOBAL", "GLOBAL_SELECTOR"]:
         for mod in modulos_eventos:
             if visibilidad_capas[mod.name]: mod.update(tiempo_actual)
-    elif estado_sistema == "INDIVIDUAL":
+    elif estado_sistema in ["INDIVIDUAL", "ALEATORIO"]:
         evento_actual_individual.update(tiempo_actual)
 
     if estado_sistema in ["MENU", "ACTUALIZACION", "BOOT_1", "BOOT_2", "LEYENDA", "AJUSTES"]:
@@ -470,15 +486,15 @@ while ejecutando:
         pygame.draw.line(pantalla, color_linea, (0, ALTO - 50), (ANCHO, ALTO - 50), 1)
         pantalla.blit(fuente_teletipo.render("[ESPACIO] SELECCIONAR/EDITAR   [LARGA] VOLVER", True, color_linea), (30, ALTO - 35))
 
-    elif estado_sistema in ["GLOBAL", "GLOBAL_SELECTOR", "INDIVIDUAL", "REPOSO"]:
+    elif estado_sistema in ["GLOBAL", "GLOBAL_SELECTOR", "INDIVIDUAL", "ALEATORIO", "REPOSO"]:
         dibujar_lienzo_base(pantalla, tema_actual)
-        
-        lienzo_eventos.fill((0, 0, 0, 0)) 
-        
+
+        lienzo_eventos.fill((0, 0, 0, 0))
+
         if estado_sistema in ["GLOBAL", "GLOBAL_SELECTOR"]:
             for mod in modulos_eventos:
                 if visibilidad_capas[mod.name]: mod.draw(lienzo_eventos, color_linea, color_fondo)
-        elif estado_sistema == "INDIVIDUAL":
+        elif estado_sistema in ["INDIVIDUAL", "ALEATORIO"]:
             evento_actual_individual.draw(lienzo_eventos, color_linea, color_fondo)
         
         pantalla.blit(pygame.transform.smoothscale(lienzo_eventos, (LIENZO_ANCHO, LIENZO_ALTO)), (LIENZO_OFFSET_X, LIENZO_OFFSET_Y))
@@ -488,6 +504,9 @@ while ejecutando:
         
         if estado_sistema == "REPOSO": teletipo = "MODO REPOSO ACTIVO — SISTEMAS SUSPENDIDOS."
         elif estado_sistema == "INDIVIDUAL": teletipo = getattr(evento_actual_individual, "mensaje", "MONITOREO ACTIVO...")
+        elif estado_sistema == "ALEATORIO":
+            nombre_capa = evento_actual_individual.name.split('. ', 1)[1] if '. ' in evento_actual_individual.name else evento_actual_individual.name
+            teletipo = f"[MODO ALEATORIO: {nombre_capa}] {getattr(evento_actual_individual, 'mensaje', 'MONITOREO ACTIVO...')}"
         else:
             capas_activas = [mod for mod in modulos_eventos if visibilidad_capas[mod.name]]
             if not capas_activas: teletipo = "PANÓPTICO GLOBAL — TODAS LAS CAPAS DESACTIVADAS."

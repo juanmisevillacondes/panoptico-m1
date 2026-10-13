@@ -199,6 +199,20 @@ monitor principal y especifica la procedencia de sus datos.
   calculada con propagación SGP4, igual que la capa 21). Requiere el
   paquete "sgp4" instalado (ver requirements.txt).
 
+[27] EL OJO DEL CIELO (FOTO SATELITAL REAL)
+- SEÑAL: Fotografía real de la Tierra a color, no un dibujo vectorial.
+  Es la única capa que rompe el estilo monocromo del resto del panel,
+  a propósito: es la forma honesta de mostrar nubes reconocibles.
+- INTERPRETACIÓN: Instantánea satelital real de la cobertura de nubes
+  de todo el planeta. Se combinan dos satélites (Terra + Aqua, horas de
+  paso distintas) para reducir los huecos de cada pasada individual;
+  aun así pueden verse franjas sin datos — es una limitación real de
+  los satélites polares, no un fallo del programa.
+- ESTADO DE DATOS: Real (NASA GIBS, WMS). Usa la imagen de AYER
+  (mosaico completo de 24h) en vez de "hoy" (que estaría a medio
+  completar), así que tiene ~24-48h de retraso respecto al instante
+  actual.
+
 ------------------------------------------------------------------
 * Para alterar la visualización de capas individuales, invoque el
   GESTOR DE CAPAS [Tecla ESPACIO] dentro del Modo Global.
