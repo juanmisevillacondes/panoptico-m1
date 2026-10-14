@@ -97,10 +97,16 @@ monitor principal y especifica la procedencia de sus datos.
   Banco Mundial (API pública), no con una cifra fija inventada.
 
 [15] EL ESPECTRO LUMÍNICO (APAGONES MASIVOS)
-- SEÑAL: Nodos de luces urbanas fijas que sufren vacíos oscuros.
-- INTERPRETACIÓN: Cortes de energía y fallos en cascada dentro de 
-  la infraestructura eléctrica global.
-- ESTADO DE DATOS: Simulado.
+- SEÑAL: Nodos de luces urbanas fijas que sufren vacíos oscuros, con
+  etiqueta del país real y su puntuación de anomalía.
+- INTERPRETACIÓN: No es literalmente el corte eléctrico en sí (no hay
+  un sensor público de eso), sino su síntoma visible desde fuera: el
+  país deja de responder en la red. Las grandes capitales (luces
+  ambientales de fondo) rara vez se apagan de verdad; los cortes
+  reales ocurren casi siempre en países más pequeños o en conflicto.
+- ESTADO DE DATOS: Real (IODA — Internet Outage Detection and
+  Analysis, Georgia Tech — sin clave). Si ningún país monitorizado
+  tiene una anomalía real en este instante, no se inventa ninguna.
 
 [16] LA MEMORIA DEL BOSQUE (DEFORESTACIÓN)
 - SEÑAL: Bloques geométricos sobre selvas que pierden píxeles.
