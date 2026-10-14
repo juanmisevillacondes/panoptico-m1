@@ -213,6 +213,28 @@ monitor principal y especifica la procedencia de sus datos.
   completar), así que tiene ~24-48h de retraso respecto al instante
   actual.
 
+[28] LA FURIA SOLAR (FULGURACIONES EN RAYOS X)
+- SEÑAL: Pequeño sol esquemático en el borde superior, con rayos y
+  pulso cuyo tamaño/intensidad escala con la severidad real.
+- INTERPRETACIÓN: Última fulguración solar detectada en rayos X por
+  los satélites GOES. Escala real A/B (sin efecto) < C (menor) <
+  M (moderado, riesgo de radio HF) < X (severo, apagón HF probable).
+- ESTADO DE DATOS: Real (NOAA SWPC, satélites GOES, sin clave).
+
+[29] EL CENTINELA DE ASTEROIDES (OBJETOS CERCANOS A LA TIERRA)
+- SEÑAL: Panel de radar con anillos concéntricos (distancias lunares)
+  en una esquina del mapa, no un punto sobre la geografía terrestre.
+- INTERPRETACIÓN: Los asteroides no sobrevuelan un punto fijo de la
+  Tierra como un satélite, así que NO se inventa una ubicación
+  geográfica falsa. El ÁNGULO de cada punto es decorativo (solo
+  reparte los objetos visualmente); la DISTANCIA (en Distancias
+  Lunares reales), el TAMAÑO y si está marcado como potencialmente
+  peligroso (punto relleno) son datos reales de la NASA.
+- ESTADO DE DATOS: Real (NASA NeoWs). Usa la clave pública DEMO_KEY
+  por defecto (límite suficiente para el ritmo de esta capa); puedes
+  poner tu propia clave gratuita de api.nasa.gov en
+  settings.ini [API] nasa_key para mayor fiabilidad.
+
 ------------------------------------------------------------------
 * Para alterar la visualización de capas individuales, invoque el
   GESTOR DE CAPAS [Tecla ESPACIO] dentro del Modo Global.
